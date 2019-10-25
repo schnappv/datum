@@ -10,6 +10,7 @@ import sqlalchemy as db
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
+
 def default_data_loc(file_name):
     """
     Locates the path of a file in the data folder
@@ -39,7 +40,7 @@ def create_db(file_name, db_name, table_name):
         db_name (str): the name of the database
 
         table_name (str): the name of the database table
-    
+
     Returns:
         *None*
     """
@@ -51,7 +52,7 @@ def create_db(file_name, db_name, table_name):
         conn = sqlite3.connect(new_path)
         df.to_sql(table_name, conn, if_exists="replace", index=False)
         logger.debug("Database created.")
-    
+
     except (
         FileNotFoundError,
         NameError,

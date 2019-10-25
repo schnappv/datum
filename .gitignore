@@ -108,7 +108,7 @@ venv.bak/
 .DS_Store
 
 # data file
-/datum/data/
+/datum/data/*
 
 # data files
 *.xlsx

@@ -93,7 +93,7 @@ class AccessDataBase(object):
         Converts queried database results into a dataframe
 
         Args:
-            query_result (list): the queried database in a list format
+          q query_result (list): the queried database in a list format
 
         Returns:
             result_df
