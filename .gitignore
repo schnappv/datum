@@ -115,3 +115,7 @@ venv.bak/
 *.xlsm
 *.csv
 *.db
+
+# Pipfile
+/Pipfile
+/Pipfile.lock

@@ -74,7 +74,7 @@ class AccessDataBase(object):
 
         Args:
             query (sqlalchemy.sql.selectable.Select): sqlalchemy query command
-    
+
         Returns:
             result_set
         """
