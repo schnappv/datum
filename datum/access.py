@@ -108,7 +108,10 @@ class AccessDataBase(object):
             logger.error("{}: {}".format(type(e), str(e)))
             raise
 
-    def query(self, db_query: SQLSelect):
+    def query(
+        self,
+        db_query: SQLSelect = None
+    ):
         """
         Queries the selected database with some sqlalchemy select statement
 
@@ -119,6 +122,9 @@ class AccessDataBase(object):
             result_set
         """
         try:
+            if db_query is None:
+                db_query = db.select([self.table])
+
             result_set = self._exc_query(db_query)
             results_df = self._make_dframe(result_set)
 
