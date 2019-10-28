@@ -30,7 +30,7 @@ def default_data_loc(file_name):
         raise
 
 
-def create_db(file_name, db_name, table_name):
+def create_db(file_name, db_name, table_name, data_loc=default_data_loc):
     """
     Creates a SQLite3 database table from the exxcel file specified
 
@@ -44,8 +44,8 @@ def create_db(file_name, db_name, table_name):
     Returns:
         *None*
     """
-    file_path = default_data_loc(file_name)
-    new_path = default_data_loc(db_name)
+    file_path = data_loc(file_name)
+    new_path = data_loc(db_name)
     df = pd.read_csv(file_path)
 
     try:
