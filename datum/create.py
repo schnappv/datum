@@ -41,6 +41,8 @@ def create_db(file_name, db_name, table_name, data_loc=default_data_loc):
 
         table_name (str): the name of the database table
 
+        data_loc (func): a function pointing to data path
+
     Returns:
         *None*
     """
