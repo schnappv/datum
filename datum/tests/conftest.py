@@ -2,12 +2,12 @@ import logging
 import os
 from pathlib import Path
 
+import pytest
 import sqlalchemy as db
+
 from datum.access import AccessDataBase
 
-import pytest
-
-log_fmt = "[%(asctime)s %(levelname)-8s] [%(filename)s:%(lineno)s - %(funcName)s()] %(messages)s"  # noqa
+log_fmt = "[%(asctime)s %(levelname)-8s] [%(filename)s:%(lineno)s - %(funcName)s()] %(message)s"  # noqa
 logging.basicConfig(level=logging.DEBUG, format=log_fmt)
 
 logger = logging.getLogger(__name__)

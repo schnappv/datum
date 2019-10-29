@@ -10,9 +10,6 @@ from datum.access import AccessDataBase
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
-myPath = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, myPath + '/../')
-
 
 def test_adb(file_path, table_name, my_query):
     start = time.time()
