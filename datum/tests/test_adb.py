@@ -22,6 +22,6 @@ def test_adb(file_path, table_name, my_query):
 
 
 def test_exception(file_path, table_name, foo):
-    with pytest.raises(TypeError):
+    with pytest.raises(AttributeError):
         data_base = AccessDataBase(file_path, table_name)
         data_base.query(foo)

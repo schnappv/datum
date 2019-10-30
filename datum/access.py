@@ -121,21 +121,15 @@ class AccessDataBase(object):
         Returns:
             result_set
         """
-        if isinstance(db_query, db.sql.selectable.Select) or db_query is None:
-            try:
-                if db_query is None:
-                    db_query = db.select([self.table])
+        try:
+            if db_query is None:
+                db_query = db.select([self.table])
 
-                result_set = self._exc_query(db_query)
-                results_df = self._make_dframe(result_set)
+            result_set = self._exc_query(db_query)
+            results_df = self._make_dframe(result_set)
 
-                return results_df
+            return results_df
 
-            except (IndexError, TypeError, Exception) as e:
-                logger.error("{}:".format(type(e)), exc_info=True)
-                raise
-
-        else:
-            raise TypeError(
-                "db_query must be a sqlalchemy.sql.selectable.Select object"
-            )
+        except (IndexError, TypeError, Exception) as e:
+            logger.error("{}:".format(type(e)), exc_info=True)
+            raise
