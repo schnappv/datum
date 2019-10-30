@@ -7,7 +7,7 @@ __version__ = None
 exec(open("datum/version_.py").read())
 
 setup(
-    name="database",
+    name="datum",
     python_requires=">=3.6",
     version=__version__,
     packages=find_packages(),
