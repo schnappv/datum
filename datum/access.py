@@ -121,7 +121,7 @@ class AccessDataBase(object):
         Returns:
             result_set
         """
-        if isinstance(db_query, db.sql.selectable.Select):
+        if isinstance(db_query, db.sql.selectable.Select) or db_query is None:
             try:
                 if db_query is None:
                     db_query = db.select([self.table])
