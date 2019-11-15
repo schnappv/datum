@@ -1,11 +1,12 @@
 import logging
 import os
+import sqlite3
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
-import sqlite3
 import sqlalchemy as db
+from dateutil.parser import parse
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -30,6 +31,23 @@ def default_data_loc(file_name):
         raise
 
 
+def is_date(string: str):
+    """
+    Return whether the string can be interpreted as a date.
+
+    Args:
+        string: string to check for date
+
+    Returns:
+        bool
+    """
+    try:
+        parse(string, fuzzy=False)
+        return True
+    except ValueError:
+        return False
+
+
 def create_db(file_name, db_name, table_name, data_loc=default_data_loc):
     """
     Creates a SQLite3 database table from the exxcel file specified
@@ -49,6 +67,10 @@ def create_db(file_name, db_name, table_name, data_loc=default_data_loc):
     file_path = data_loc(file_name)
     new_path = data_loc(db_name)
     df = pd.read_csv(file_path)
+    for col in df.columns:
+        if str(df[col].dtype) == "object":
+            if is_date(df[col].iloc[1]) is True:
+                df[col] = pd.to_datetime(df[col])
 
     try:
         conn = sqlite3.connect(new_path)
