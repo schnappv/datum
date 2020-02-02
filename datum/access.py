@@ -12,7 +12,7 @@ FilePath = typing.NewType("FileType", str)
 SQLSelect = typing.NewType("SQLSelect", db.sql.selectable.Select)
 
 
-class AccessDataBase(object):
+class Access(object):
     """
     Used to query a database and convert into a DataFrame
     """

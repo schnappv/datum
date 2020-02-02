@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 import sqlalchemy as db
 
-from datum.access import AccessDataBase
+from datum.access import Access
 
 log_fmt = "[%(asctime)s %(levelname)-8s] [%(filename)s:%(lineno)s - %(funcName)s()] %(message)s"  # noqa
 logging.basicConfig(level=logging.DEBUG, format=log_fmt)
@@ -28,7 +28,7 @@ def table_name():
 def my_query():
     pardir = Path(__file__).parents[0]
     file_path = os.path.join(pardir, "data.db")
-    data = AccessDataBase(file_path, "IOC")
+    data = Access(file_path, "IOC")
     engine, _ = data.db_properties
     table = db.Table("IOC", db.MetaData(),
                      autoload=True, autoload_with=engine)
