@@ -42,8 +42,11 @@ def is_date(string: str):
         bool
     """
     try:
-        parse(string, fuzzy=False)
-        return True
+        if isinstance(string, str):
+            parse(string, fuzzy=False)
+            return True
+        else:
+            return False
     except ValueError:
         return False
 
@@ -66,11 +69,14 @@ def create_db(file_name, db_name, table_name, data_loc=default_data_loc):
     """
     file_path = data_loc(file_name)
     new_path = data_loc(db_name)
-    df = pd.read_csv(file_path)
+    df = pd.read_csv(file_path, low_memory=False)
     for col in df.columns:
-        if str(df[col].dtype) == "object":
-            if is_date(df[col].iloc[1]) is True:
+        if df[col].apply(is_date).any():
+            try:
                 df[col] = pd.to_datetime(df[col])
+            except ValueError:
+                logger.error("Column includes a value that cannot be parsed")
+                pass
 
     try:
         conn = sqlite3.connect(new_path)

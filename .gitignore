@@ -109,6 +109,7 @@ venv.bak/
 
 # data folder
 /datum/data/
+/datum/executables/
 
 # Pipfile
 /Pipfile
