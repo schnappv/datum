@@ -6,7 +6,7 @@ import sqlalchemy as db
 from sqlalchemy import exc
 
 logger = logging.getLogger(__name__)
-logger.addHandler(logging.NullHandler)
+logger.addHandler(logging.NullHandler())
 
 FilePath = typing.NewType("FileType", str)
 SQLSelect = typing.NewType("SQLSelect", db.sql.selectable.Select)
