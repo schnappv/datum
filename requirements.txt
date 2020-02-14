@@ -4,3 +4,4 @@ patsy==0.5.1
 sqlalchemy==1.3.3
 xlrd==1.2.0
 pytest==4.4.1
+sqlitis==0.0.5

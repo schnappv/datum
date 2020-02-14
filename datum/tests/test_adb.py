@@ -19,9 +19,3 @@ def test_adb(file_path, table_name, my_query):
     logger.debug("time: {:6.4f}".format(time.time() - start))
     logger.debug("Sex: {}".format(row.Sex))
     assert row.Sex == "F"
-
-
-def test_exception(file_path, table_name, foo):
-    with pytest.raises(AttributeError):
-        data_base = Access(file_path, table_name)
-        data_base.query(foo)

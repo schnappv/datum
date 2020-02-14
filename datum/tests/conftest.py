@@ -28,13 +28,15 @@ def table_name():
 def my_query():
     pardir = Path(__file__).parents[0]
     file_path = os.path.join(pardir, "data.db")
-    data = Access(file_path, "IOC")
-    engine, _ = data.db_properties
-    table = db.Table("IOC", db.MetaData(),
-                     autoload=True, autoload_with=engine)
-    return db.select([table]).where(table.c.Sex == "F")
+    a = Access(file_path, "IOC")
+    return db.select([a.table]).where(a.table.c.Sex == "F")
 
 
 @pytest.fixture(scope="session")
 def foo():
     return foo
+
+
+@pytest.fixture(scope="session")
+def date_parse():
+    return ["1/11/1996", "01-11-1996"]
