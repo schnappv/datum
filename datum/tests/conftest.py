@@ -6,6 +6,7 @@ import pytest
 import sqlalchemy as db
 
 from datum.access import Access
+from datum.sqlitis.convert import to_sqla
 
 log_fmt = "[%(asctime)s %(levelname)-8s] [%(filename)s:%(lineno)s - %(funcName)s()] %(message)s"  # noqa
 logging.basicConfig(level=logging.DEBUG, format=log_fmt)
@@ -29,7 +30,12 @@ def my_query():
     pardir = Path(__file__).parents[0]
     file_path = os.path.join(pardir, "data.db")
     a = Access(file_path, "IOC")
-    return db.select([a.table]).where(a.table.c.Sex == "F")
+    q = "SELECT * FROM IOC WHERE IOC.Sex = F"
+    select = "db."+to_sqla(q).replace(
+        "IOC", "a.table").replace("text('F')", "'F'")
+    query = eval(select)
+
+    return query
 
 
 @pytest.fixture(scope="session")
