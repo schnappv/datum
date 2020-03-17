@@ -68,6 +68,9 @@ class Access(object):
 
         return engine, connection
 
+    def _to_sqla(self):
+        raise NotImplementedError("In the works")
+
     def _exc_query(self, query: SQLSelect):
         """
         Executes some query
@@ -110,7 +113,7 @@ class Access(object):
 
     def query(
         self,
-        db_query: SQLSelect = None
+        db_query: SQLSelect = None,
     ):
         """
         Queries the selected database with some sqlalchemy select statement
