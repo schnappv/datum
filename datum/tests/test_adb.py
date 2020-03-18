@@ -33,7 +33,7 @@ def test_generate_db(table_name):
 def test_adb(file_path, table_name, my_query):
     start = time.time()
     a = Access(file_path, table_name)
-    q = sql_a(my_query, a)
+    q = sql(my_query, a)
     results = a.query(db_query=q)
     logger.debug("time: {:6.4f}".format(time.time() - start))
     logger.debug("Sex: {}".format(results.iloc[0].Sex))

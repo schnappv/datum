@@ -138,7 +138,7 @@ class Access(object):
             raise
 
 
-def sql_a(sql_q, a):
+def sql(sql_q, a):
     """
     Converts SQLite query to sqlalchemy for execution
 
@@ -147,8 +147,8 @@ def sql_a(sql_q, a):
         a (Access): our access class object 
 
     Returns:
-        sql_a
-        """
+        query
+    """
     try:
         source = sql_q.split()
         for i, w in enumerate(source):
