@@ -8,7 +8,7 @@ import pytest
 import numpy as np
 
 from datum.create import create_db
-from datum.access import Access, sql_a
+from datum.access import Access, sql
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -25,6 +25,9 @@ def test_generate_db(table_name):
         logger.debug("This will take a minute...")
         create_db("athlete_events.csv", "data.db", table_name, data_loc)
         logger.debug("Database generated!")
+    else:
+        logger.debug("Database generation failed!")
+
     logger.debug("time: {:6.4f}".format(time.time() - start))
 
     assert os.path.exists(data_loc("data.db"))
