@@ -160,6 +160,7 @@ def sql(sql_q, a):
     select = "db." + to_sqla(sql_q)
     sql_a = select.replace(table, _retrieve_name(a)+".table").replace(
         "text", "").replace("('", "'").replace("')", "'")
+    print(sql_a)
     query = eval(sql_a)
 
     return query

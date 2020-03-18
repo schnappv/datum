@@ -26,7 +26,7 @@ def table_name():
 
 @pytest.fixture(scope="session")
 def my_query():
-    return "SELECT * FROM IOC WHERE IOC.Sex = F"
+    return "SELECT Age, Sex FROM IOC WHERE IOC.Sex = F"
 
 
 @pytest.fixture(scope="session")
