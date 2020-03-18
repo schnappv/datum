@@ -1,9 +1,12 @@
 import logging
 import typing
 
+import inspect
 import pandas as pd
 import sqlalchemy as db
 from sqlalchemy import exc
+
+from datum.sqlitis.convert import to_sqla
 
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
@@ -67,9 +70,6 @@ class Access(object):
         connection = self.connection
 
         return engine, connection
-
-    def _to_sqla(self):
-        raise NotImplementedError("In the works")
 
     def _exc_query(self, query: SQLSelect):
         """
@@ -136,3 +136,43 @@ class Access(object):
         except (IndexError, TypeError, Exception) as e:
             logger.error("{}:".format(type(e)), exc_info=True)
             raise
+
+
+def sql_a(sql_q, a):
+    """
+    Converts SQLite query to sqlalchemy for execution
+
+    Args:
+        sql_q (str): a string of a SQLite select statement
+        a (Access): our access class object 
+
+    Returns:
+        sql_a
+        """
+    try:
+        source = sql_q.split()
+        for i, w in enumerate(source):
+            if w == "FROM":
+                table = source[i+1]
+    except Exception:
+        logger.debug("Target word is not in the source")
+
+    select = "db." + to_sqla(sql_q)
+    sql_a = select.replace(table, _retrieve_name(a)+".table").replace(
+        "text", "").replace("('", "'").replace("')", "'")
+    query = eval(sql_a)
+
+    return query
+
+
+def _retrieve_name(var):
+    """
+    Gets the name of var. Does it from the out most frame inner-wards.
+    :param var: variable to get name from.
+    :return: string
+    """
+    for fi in reversed(inspect.stack()):
+        names = [var_name for var_name,
+                 var_val in fi.frame.f_locals.items() if var_val is var]
+        if len(names) > 0:
+            return names[0]
