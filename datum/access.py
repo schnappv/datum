@@ -144,7 +144,7 @@ def sql(sql_q, a):
 
     Args:
         sql_q (str): a string of a SQLite select statement
-        a (Access): our access class object 
+        a (datum.Access): our access class object 
 
     Returns:
         query
@@ -160,7 +160,6 @@ def sql(sql_q, a):
     select = "db." + to_sqla(sql_q)
     sql_a = select.replace(table, _retrieve_name(a)+".table").replace(
         "text", "").replace("('", "'").replace("')", "'")
-    print(sql_a)
     query = eval(sql_a)
 
     return query
@@ -168,12 +167,17 @@ def sql(sql_q, a):
 
 def _retrieve_name(var):
     """
-    Gets the name of var. Does it from the out most frame inner-wards.
-    :param var: variable to get name from.
-    :return: string
+    Gets the name of var. Does it from the out most frame inner-wards
+
+    Args:
+        var: variable to get name from.
+
+    Returns:
+        names
     """
     for fi in reversed(inspect.stack()):
         names = [var_name for var_name,
                  var_val in fi.frame.f_locals.items() if var_val is var]
         if len(names) > 0:
-            return names[0]
+            name = names[0]
+            return name
