@@ -77,7 +77,7 @@ Access and query the database using the `Access` class
 
 - SQL conversion parameters:
      - `sql_q`: the SQLite query as a string
-     - `access_obj`: the Access class object being used
+     - `a`: the Access class object being used
 
 - Methods:
     - `Access.query()`: queries the object based off on SQLite select command and returns a `pandas` dataframe for usage
