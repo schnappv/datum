@@ -1,4 +1,5 @@
 # `datum` v 0.0.5
+
 Ingest and generate queries of large databases.
 
 ![](datum/doc/datum.png)
@@ -29,7 +30,7 @@ python setup.py install
 
 ## Usage
 
-There are 2 main usages of this package: create and access
+There are 2 main usages of this package: __create__ and __access__
 
 ### 1.   Create
 
