@@ -107,14 +107,11 @@ venv.bak/
 .vscode/
 .DS_Store
 
-# data file
-/datum/data/*
-
-# data files
-*.xlsx
-*.xlsm
-*.csv
-*.db
+# data folder
+/datum/data/
+/datum/executables/
+/datum/tests/*.db
+/datum/tests/data.db
 
 # Pipfile
 /Pipfile
