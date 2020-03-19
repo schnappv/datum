@@ -46,7 +46,11 @@ Ingest a large CSV file into a SQLite database using the `create_db` function
     - Default data location (`default_data_loc`) which will put the generated data in a folder `./datum/data`. 
 
 - Example:
-        
+
+        # imports
+        from datum.create import create_db
+
+        # parameters
         file_name = "athlete_events.csv"
         db_name = "data.db"
         table_name = "IOC"
@@ -54,15 +58,46 @@ Ingest a large CSV file into a SQLite database using the `create_db` function
         def data_loc(file_name):
             pardir = Path(__file__).parents[0]
             return os.path.join(pardir, "example", file_name)
-        
+
+        # code implementation
+
         create_db(file_name, db_name, table_name, data_loc)
 
 _Note_: Add your data location folder into the `.gitignore` and make sure that
-the CSV file is in there before generating the database. 
+the CSV file is in there before generating the database. The current example data was taken from the `datum/tests` folder.
 
 ### 2.   Access
 
 Access and query the database using the `Access` class
+
+- Class parameters:
+    - `data_base`: the file path of the database
+    - `table_name`: the name of the table you want to access
+
+- SQL conversion parameters:
+     - `sql_q`: the SQLite query as a string
+     - `access_obj`: the Access class object being used
+
+- Methods:
+    - `Access.query()`: queries the object based off on SQLite select command and returns a `pandas` dataframe for usage
+    - `Access.db_properities`: returns the engine and connection being used
+
+- Example:
+
+        # imports
+        from datum.access import Access, sql
+
+        # parameters
+        data_base = data_loc(db_name)
+        table = "IOC"
+        sqlite_q = "SELECT Age, Sex FROM IOC WHERE IOC.Sex = F"
+
+        # code implementation
+        a = Access(data_base, table)
+        query = sql(sqlite_q, a)
+
+        queried_data = a.query(query)
+
 
 -------------
 

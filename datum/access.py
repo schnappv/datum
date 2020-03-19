@@ -138,7 +138,7 @@ class Access(object):
             raise
 
 
-def sql(sql_q, a):
+def sql(sql_q, access_obj):
     """
     Converts SQLite query to sqlalchemy for execution
 
@@ -158,7 +158,7 @@ def sql(sql_q, a):
         logger.debug("Target word is not in the source")
 
     select = "db." + to_sqla(sql_q)
-    sql_a = select.replace(table, _retrieve_name(a)+".table").replace(
+    sql_a = select.replace(table, _retrieve_name(access_obj)+".table").replace(
         "text", "").replace("('", "'").replace("')", "'")
     query = eval(sql_a)
 
