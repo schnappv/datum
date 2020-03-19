@@ -5,6 +5,8 @@ Ingest and generate queries of large databases.
 
 The repo is located [here](https://github.com/schnappv/datum)
 
+-----------
+
 ## About
 A package to ingest a large csv file into a SQLIte database, and return a 
 pandas data frame of a specified query. This query must be a `sqlalchemy` 
@@ -14,6 +16,8 @@ pulled into this repository for usage outside of the command line.
 
 More about the `sqlitis` package can be found [here](https://github.com/pglass/sqlitis).
 
+-----------
+
 ## Quickstart
 
 ```bash
@@ -21,10 +25,46 @@ pip install -r requirements.txt
 
 python setup.py install
 ```
+------------
 
 ## Usage
 
+There are 2 main usages of this package: create and access
 
+### 1.   Create
+
+Ingest a large CSV file into a SQLite database using the `create_db` function
+
+- Parameters needed: 
+    - `file_name`: the name of the csv file. As of now, `datum` only takes in csv files, not excel files.
+    - `db_name`: the name of the database you want to make
+    - `table_name`: the name of the database table you are generating
+    - `data_loc`: a wrapper function pointing to the location in which you are storing the data
+
+- Features:
+    - Date parsing function (`is_date`) which will automatically turn text columns filled with dates into timestamps.
+    - Default data location (`default_data_loc`) which will put the generated data in a folder `./datum/data`. 
+
+- Example:
+        
+        file_name = "athlete_events.csv"
+        db_name = "data.db"
+        table_name = "IOC"
+
+        def data_loc(file_name):
+            pardir = Path(__file__).parents[0]
+            return os.path.join(pardir, "example", file_name)
+        
+        create_db(file_name, db_name, table_name, data_loc)
+
+_Note_: Add your data location folder into the `.gitignore` and make sure that
+the CSV file is in there before generating the database. 
+
+### 2.   Access
+
+Access and query the database using the `Access` class
+
+-------------
 
 ## Test
 
@@ -42,12 +82,16 @@ python -m pytest -v
 
 Note: the first time you test, it will take about a minute due to generating a database as it tests. After it is there, it will only take less than a second to test.
 
+--------------
+
 ## Feature Requests and Bug Reporting
 
 Please open an issue on GitHub.
+
+--------------
 
 ## Authors
 
 - [Valerie Schnapp](valerie.f.schnapp@gmail.com) - Repo Owner / Architect
 
-__Sqlitis Author__: Paul Glass
+- __Sqlitis Author__: Paul Glass

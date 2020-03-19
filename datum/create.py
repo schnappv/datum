@@ -56,7 +56,7 @@ def create_db(file_name, db_name, table_name, data_loc=default_data_loc):
     Creates a SQLite3 database table from the exxcel file specified
 
     Args:
-        file_name (str): the name of the excel file
+        file_name (str): the name of the csv file
 
         db_name (str): the name of the database
 
