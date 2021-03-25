@@ -6,4 +6,4 @@ xlrd==1.2.0
 pytest==4.4.1
 sqlitis==0.0.5
 sqlparse==0.3.0
-PyYaml==5.3
+PyYaml==5.4
