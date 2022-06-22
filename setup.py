@@ -14,7 +14,7 @@ setup(
     include_package_data=False,
     zip_safe=False,
     install_requires=[
-        "numpy==1.16.3",
+        "numpy==1.22.0",
         "pandas==0.24.2",
         "patsy==0.5.1",
         "sqlalchemy==1.3.3",
